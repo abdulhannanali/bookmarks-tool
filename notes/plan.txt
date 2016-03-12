@@ -1,0 +1,7 @@
+Data Management in the application
+
+There will be an index.json file storing all the indexes of the bookmarks file 
+and a separate file storing the bookmark's further data
+
+Both these files should be present in order to make the availability of the data possible
+other wise an error will be thrown, most probably.
