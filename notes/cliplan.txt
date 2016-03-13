@@ -1,0 +1,16 @@
+The cli will work like this 
+
+
+- bookmarker -a <url>
+- This should add the url
+
+
+- bookmarker or bookmarker -l
+- should list all the bookmarks 
+
+
+- bookmarker -d <bookmarkId> || bookmarker --details <bookmarkId>
+- gives the detail of the bookmark by the id
+
+- bookmarker --help || bookmarker -h
+- returns the help of the bookmarker application

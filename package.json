@@ -18,12 +18,14 @@
   },
   "homepage": "https://github.com/abdulhannanali/bookmarks-tool#readme",
   "dependencies": {
+    "chalk": "^1.1.1",
     "cheerio": "^0.20.0",
+    "cli-table": "^0.3.1",
+    "cli-table2": "^0.2.0",
     "commander": "^2.9.0",
     "lodash": "^4.6.1",
     "mkdirp": "^0.5.1",
     "request": "^2.69.0",
-    "rimraf": "^2.5.2",
-    "wurl": "^2.1.0"
+    "rimraf": "^2.5.2"
   }
 }
