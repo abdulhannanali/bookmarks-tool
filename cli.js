@@ -53,10 +53,9 @@ program
 	.option("-c, --compact, output a compact table")
 	.action(function (options) {
 		var index = bookmarker.getIndex()	
-		if (_.isEmpty(index)) {
-			var x = new Table() 
-			x.push([chalk.red("Sorry no bookmarks found! 😢😢😢")])
-			console.log(x.toString())
+
+		if (_.isEmpty(index.items)) {
+			displayError("Sorry no bookmarks found to list! 😢😢😢")
 		}
 		else {
 			var x = new Table({
@@ -70,7 +69,9 @@ program
 
 
 			index.items.forEach(function (bookmark) {
-				x.push([bookmark.id, bookmark.url || "", bookmark.title])
+				x.push([bookmark.id != undefined ? bookmark.id : chalk.red("ID MISSING"), 
+						bookmark.url || chalk.red("URL MISSING"), 
+						bookmark.title || chalk.red("TITLE MISSING")])
 			})
 
 			console.log(x.toString())
@@ -99,7 +100,7 @@ program
 	.action(function (id, options) {
 		var bookmarkId = parseInt(id)
 
-		if (!bookmarkId || bookmarkId < 0) {
+		if (bookmarkId == undefined || bookmarkId < 0) {
 			displayError("Sorry! Please enter a valid bookmark id")
 		}
 		else {
@@ -111,16 +112,52 @@ program
 				detailsFormatter(details)
 				console.log("")
 				console.log("Type bookmarker --help in order to access the help")
-				console.log("")
 			}
 		}
 	})
 
 // delete command to delete the bookmarks
 // -a option deletes all the bookmarks
-// program
-// 	.command("delete <id>")
-// )
+program
+	.command("delete [id]")
+	.description("delete the bookmarks from the application")
+	.option("-a, --all, delete all the bookmarks from the application")
+	.option("-i, --info, outputs information regarding the deleting bookmark (works only without -a flag)")
+	.option("-d, --debug, run the command in debug mode")
+	.action(function (id, options) {
+		try {
+			if (options.all) {
+				bookmarker.clearBookmarks()
+				console.log(chalk.green("All the bookmarks have been successfully deleted"))
+			}
+			else if (!options.all && parseInt(id) != undefined) {
+				var bookmarkId = parseInt(id)
+				var bookmarkDetails = bookmarker.readBookmark(id)
+				if (bookmarker.deleteBookmark(bookmarkId)) {
+					console.log(chalk.green("Bookmark with ID " + bookmarkId + " has been successfully deleted"))
+					
+					if (options.info) {
+						console.log("\nDetails regarding the deleted bookmark\n")
+						console.log("")
+						detailsFormatter(bookmarkDetails)
+					}
+				}
+				else {
+					console.log(chalk.blue("Bookmark with ID " + bookmarkId + " was not deleted"))
+				}
+			}
+			else {
+				console.log(chalk.red("\nerror: missing required argument `id'\n"))
+			}
+		}
+		catch (error) {
+			if (options.debug) {
+				console.error(error)
+			}
+			displayError(`Error occured while deleting ${options.all ? "all the " : ""}bookmark${options.all ? "s" : ""}`)
+		}
+	})
+
 
 
 // helper functions
@@ -129,7 +166,10 @@ function displayError(msg) {
 		msg = ""
 	}
 
-	var x = new Table()
+	var x = new Table({
+		wordwrap: true,
+		colWidths: [50]
+	})
 	x.push([chalk.red(msg)])
 
 	console.log(x.toString())
@@ -140,10 +180,13 @@ function detailsFormatter (details) {
 		style: {
 			head: ["yellow"],
 			border: ["america"]
-		}
+		},
+		wordWrap: true
 	})
 
 	var metaDetails = new Table({
+		colWidths: [20, 80],
+		wordWrap: true,
 		style: {
 			border: ["rainbow"]
 		}

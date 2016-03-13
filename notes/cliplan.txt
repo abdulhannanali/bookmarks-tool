@@ -14,3 +14,11 @@ The cli will work like this
 
 - bookmarker --help || bookmarker -h
 - returns the help of the bookmarker application
+
+bookmark details should give appropriate feedback on whether the bookmark was 
+deleted or not. Like, if it was already present.
+ATM it's telling me that it was successfully deleted, because the process runs without throwing an error and also because rimraf module which just doesn't tell if it was already there or not.
+
+The operations it's performing till now are creation, deletion and listing.
+
+Search feature can be added to two but I am not interested in adding the feature of search
