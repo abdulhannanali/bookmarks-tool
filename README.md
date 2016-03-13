@@ -1,9 +1,16 @@
-# bookmarks-tool
+# bookmarker
 
-A Command Line tool for storing bookmarks. bookmarks-tool has the ability to fetch the meta data about the bookmark using the `request` module.
+Bookmarks managment made damn easy, bookmarker makes your bookmark management a bliss, and with it's features like automatic meta data fetching, it's a heaven for the bookmarks.
 
-## Status
-This `bookmarks-tool` is heavily under progress.
+
+## How it stores the bookmarks?
+
+`bookmarker` uses node `fs` module in order to store the bookmarks. It maintains an index in the `index.json` and seperate `json` format file for each application.
+
+
+## Contributions
+Please, please, please, Contribute!!! :) 
 
 ### LICENSE
-MIT LICENSE. See [LICENSE](LICENSE) for more details. 
+
+MIT LICENSE. SEE [LICENSE](LICENSE) for more details. 
