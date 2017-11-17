@@ -18,8 +18,8 @@
   },
   "homepage": "https://github.com/abdulhannanali/bookmarks-tool#readme",
   "dependencies": {
-    "chalk": "^1.1.1",
-    "cheerio": "^0.20.0",
+    "chalk": "^2.3.0",
+    "cheerio": "^0.22.0",
     "cli-table": "^0.3.1",
     "cli-table2": "^0.2.0",
     "commander": "^2.9.0",
