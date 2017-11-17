@@ -1,5 +1,7 @@
 # bookmarker
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/abdulhannanali/bookmarks-tool.svg)](https://greenkeeper.io/)
+
 Bookmarks managment made damn easy, bookmarker makes your bookmark management a bliss, and with it's features like automatic meta data fetching, it's a heaven for the bookmarks.
 
 
